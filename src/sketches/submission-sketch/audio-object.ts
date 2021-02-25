@@ -173,13 +173,18 @@ const AudioObject = (p: p5, fileObject: p5.File) => {
     return localFile
   }
 
+  const destroy = () => {
+    mySound.stop()
+  }
+
   return {
     draw,
     doubleClicked,
     mouseDragged,
     setState,
     keyPressed,
-    getFileObject
+    getFileObject,
+    destroy
   }
 }
 

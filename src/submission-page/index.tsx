@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import p5 from 'p5'
-import { SubmissionSketch } from '../sketches'
+import { SubmissionSketch, handleSubmitFiles } from '../sketches'
 
 const SubmissionPage: React.FC = () => {
   useEffect(() => {
@@ -17,7 +17,15 @@ const SubmissionPage: React.FC = () => {
         width: '100%',
         height: '100%'
       }}
-    />
+    >
+      <button
+        id='create-button'
+        className='submit-button'
+        onClick={handleSubmitFiles}
+      >
+        Submit Files
+      </button>
+    </div>
   )
 }
 
