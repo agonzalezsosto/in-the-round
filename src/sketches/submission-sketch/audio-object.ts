@@ -2,13 +2,14 @@
 import p5 from 'p5'
 import 'p5/lib/addons/p5.sound'
 
-const AudioObject = (p: p5, fileName: string) => {
+const AudioObject = (p: p5, fileObject: p5.File) => {
+  const localFile = fileObject
   const loadSound = (path: string) =>
     ((p as any) as p5.SoundFile).loadSound(path)
   let isSelected = false
   const pos = p.createVector(p.mouseX, p.mouseY)
 
-  const mySound = loadSound(fileName)
+  const mySound = loadSound(localFile.data)
 
   const myDelay = new p5.Delay()
   myDelay.process(mySound, 0.15, 0.8, 5000)
@@ -168,7 +169,18 @@ const AudioObject = (p: p5, fileName: string) => {
     }
   }
 
-  return { draw, doubleClicked, mouseDragged, setState, keyPressed }
+  const getFileObject = () => {
+    return localFile
+  }
+
+  return {
+    draw,
+    doubleClicked,
+    mouseDragged,
+    setState,
+    keyPressed,
+    getFileObject
+  }
 }
 
 export default AudioObject

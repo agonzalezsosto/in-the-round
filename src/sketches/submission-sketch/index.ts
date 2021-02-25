@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import p5 from 'p5'
 import AudioObject from './audio-object'
-import { Dropbox } from 'dropbox'
 
 type AudioObjectType = {
   draw: (allowWander: boolean) => void
@@ -10,14 +9,14 @@ type AudioObjectType = {
   mouseDragged: () => void
   setState: (state: boolean) => void
   keyPressed: () => void
+  getFileObject: () => p5.File
 }
 
 const SubmissionSketch = (p: p5): void => {
   const arrayObjects: Array<AudioObjectType> = []
   let viewInstructions = true
   let allowWander = false
-  // const dbx = new Dropbox({ accessToken: process.env.REACT_APP_DROPBOX_KEY })
-  console.log(process.env.REACT_APP_DROPBOX_KEY)
+  let button
 
   p.setup = () => {
     const canvasDiv = document.getElementById('submission-canvas')
@@ -26,6 +25,9 @@ const SubmissionSketch = (p: p5): void => {
     const canvas = p.createCanvas(width!, height!)
     canvas.parent('submission-canvas')
     canvas.drop(handleDropFile)
+    button = p.createButton('Submit files')
+    button.position(p.width - 100, 20)
+    button.mousePressed(handleSubmitFiles)
   }
 
   p.draw = () => {
@@ -74,87 +76,53 @@ const SubmissionSketch = (p: p5): void => {
   }
 
   const handleDropFile = (file: p5.File) => {
-    // console.log(file)
-    // console.log('b', subFile.name)
-
-    // const xhra = new XMLHttpRequest()
-    // xhra.responseType = 'blob'
-    // xhra.onload = () => {
-    //   const recoveredBlob = xhra.response
-    //   const xhr = new XMLHttpRequest()
-    //   xhr.onload = () => {
-    //     if (xhr.status === 200) {
-    //       const fileInfo = JSON.parse(xhr.response)
-    //       console.log(fileInfo)
-    //     } else {
-    //       const errorMessage = xhr.response
-    //       console.error(errorMessage)
-    //     }
-    //   }
-
-    //   xhr.open('POST', 'https://content.dropboxapi.com/2/files/upload')
-    //   xhr.setRequestHeader(
-    //     'Authorization',
-    //     'Bearer ' + process.env.REACT_APP_DROPBOX_KEY
-    //   )
-    //   xhr.setRequestHeader('Content-Type', 'application/octet-stream')
-    //   xhr.setRequestHeader(
-    //     'Dropbox-API-Arg',
-    //     JSON.stringify({
-    //       path: '/' + file.name,
-    //       mode: 'add',
-    //       autorename: true,
-    //       mute: false
-    //     })
-    //   )
-
-    //   xhr.send(recoveredBlob)
-    // }
-
-    // xhra.open('GET', file.data)
-    // xhra.send()
     if (file.type === 'audio') {
-      arrayObjects.push(AudioObject(p, file.data))
+      arrayObjects.push(AudioObject(p, file))
     }
   }
 
   const handleSubmitFiles = () => {
-    const xhra = new XMLHttpRequest()
-    xhra.responseType = 'blob'
-    xhra.onload = () => {
-      const recoveredBlob = xhra.response
+    arrayObjects.forEach(audioObject => {
+      const xhra = new XMLHttpRequest()
       const xhr = new XMLHttpRequest()
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          const fileInfo = JSON.parse(xhr.response)
-          console.log(fileInfo)
-        } else {
-          const errorMessage = xhr.response
-          console.error(errorMessage)
+      const file = audioObject.getFileObject()
+      console.log(file)
+
+      xhra.responseType = 'blob'
+      xhra.onload = () => {
+        const recoveredBlob = xhra.response
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const fileInfo = JSON.parse(xhr.response)
+            console.log(fileInfo)
+          } else {
+            const errorMessage = xhr.response
+            console.error(errorMessage)
+          }
         }
+
+        xhr.open('POST', 'https://content.dropboxapi.com/2/files/upload')
+        xhr.setRequestHeader(
+          'Authorization',
+          'Bearer ' + process.env.REACT_APP_DROPBOX_KEY
+        )
+        xhr.setRequestHeader('Content-Type', 'application/octet-stream')
+        xhr.setRequestHeader(
+          'Dropbox-API-Arg',
+          JSON.stringify({
+            path: '/' + file.name,
+            mode: 'add',
+            autorename: true,
+            mute: false
+          })
+        )
+
+        xhr.send(recoveredBlob)
       }
 
-      xhr.open('POST', 'https://content.dropboxapi.com/2/files/upload')
-      xhr.setRequestHeader(
-        'Authorization',
-        'Bearer ' + process.env.REACT_APP_DROPBOX_KEY
-      )
-      xhr.setRequestHeader('Content-Type', 'application/octet-stream')
-      xhr.setRequestHeader(
-        'Dropbox-API-Arg',
-        JSON.stringify({
-          path: '/' + file.name,
-          mode: 'add',
-          autorename: true,
-          mute: false
-        })
-      )
-
-      xhr.send(recoveredBlob)
-    }
-
-    xhra.open('GET', file.data)
-    xhra.send()
+      xhra.open('GET', file.data)
+      xhra.send()
+    })
   }
 }
 
