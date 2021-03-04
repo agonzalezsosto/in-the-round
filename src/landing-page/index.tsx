@@ -16,6 +16,8 @@ const LandingPage: React.FC = () => {
     setWidth(window.innerWidth)
   }
 
+  const isMobile = width < 800
+
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange)
     return () => {
@@ -41,14 +43,14 @@ const LandingPage: React.FC = () => {
       <div className='landing-description' style={{ zIndex: 1 }}>
         {TEXT.LANDING_DESCRIPTION}
       </div>
-      {width > 800 ? (
-        <button className='landing-button' onClick={handleNavigate}>
-          {TEXT.ENTER_TEXT}
-        </button>
-      ) : (
+      {isMobile ? (
         <div className='landing-disclaimer'>
           Please visit this page from a computer to submit seeds
         </div>
+      ) : (
+        <button className='landing-button' onClick={handleNavigate}>
+          {TEXT.ENTER_TEXT}
+        </button>
       )}
 
       <div className='landing-disclaimer'>
