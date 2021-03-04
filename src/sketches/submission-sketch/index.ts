@@ -12,9 +12,10 @@ type AudioObjectType = {
   keyPressed: () => void
   getFileObject: () => p5.File
   destroy: () => void
+  mouseIsOverShape: () => boolean
 }
 
-const arrayObjects: Array<AudioObjectType> = []
+let arrayObjects: Array<AudioObjectType> = []
 let isLoading = false
 
 export const handleSubmitFiles = (): void => {
@@ -28,12 +29,14 @@ export const handleSubmitFiles = (): void => {
       const recoveredBlob = xhra.response
       xhr.onload = () => {
         if (xhr.status === 200) {
-          const temp = arrayObjects.pop()
-          temp?.destroy()
+          arrayObjects.forEach(temp => temp.destroy())
           isLoading = false
+          arrayObjects = []
         } else {
           const errorMessage = xhr.response
           console.error(errorMessage)
+          isLoading = false
+          arrayObjects = []
         }
       }
 
@@ -66,6 +69,7 @@ const SubmissionSketch = (p: p5): void => {
   let allowWander = false
   let showError = false
   let errorMessage = ''
+  const flowField: number[][] = []
 
   p.setup = () => {
     const canvasDiv = document.getElementById('submission-canvas')
@@ -75,10 +79,33 @@ const SubmissionSketch = (p: p5): void => {
     canvas.parent('submission-canvas')
     canvas.drop(handleDropFile)
     p.textFont('Lato')
+    p.colorMode(p.HSB, 255)
+
+    for (let i = 0; i < 20; i++) {
+      flowField[i] = []
+      for (let j = 0; j < 20; j++) {
+        const noise = p.noise(i / 10, j / 10)
+        flowField[i][j] = noise
+      }
+    }
   }
 
   p.draw = () => {
     p.background(255)
+    const xInt = p.width / 20
+    const yInt = p.height / 20
+    for (let i = 0; i < 20; i++) {
+      for (let j = 0; j < 20; j++) {
+        const noise = p.noise(i / 10, j / 10, p.frameCount / 100)
+        flowField[i][j] = noise
+        const col = flowField[i][j]
+        const col2 = flowField[j][i]
+        p.stroke((col * 255 + p.frameCount) % 255, col2 * 255, 200)
+        p.fill((col * 255 + p.frameCount) % 255, col2 * 255, 200)
+        p.rect(i * xInt, j * yInt, xInt, yInt)
+      }
+    }
+
     p.strokeWeight(0.5)
     p.fill(0)
     p.textAlign(p.CENTER)
@@ -93,6 +120,7 @@ const SubmissionSketch = (p: p5): void => {
           TEXT.DESCRIPTION_REVERB +
           TEXT.DESCRIPTION_PLAYBACK +
           TEXT.DESCRIPTION_LOOP +
+          TEXT.DESCRIPTION_DELETE +
           TEXT.DESCRIPTION_RESET +
           TEXT.DESCRIPTION_GENERAL +
           TEXT.DESCRIPTION_WANDER +
@@ -149,11 +177,17 @@ const SubmissionSketch = (p: p5): void => {
     if (p.key === 'w') {
       allowWander = !allowWander
     }
+
+    if (p.key === 'x') {
+      const item = arrayObjects.find(ao => ao.mouseIsOverShape())
+      item?.destroy()
+      arrayObjects = arrayObjects.filter(ao => !ao.mouseIsOverShape())
+    }
+
     arrayObjects.forEach(audioObject => audioObject.keyPressed())
   }
 
   const handleDropFile = (file: p5.File) => {
-    console.log(file)
     if (file.type === 'audio') {
       if (file.size < 5000000) {
         arrayObjects.push(AudioObject(p, file))

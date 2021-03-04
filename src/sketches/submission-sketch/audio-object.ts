@@ -184,7 +184,8 @@ const AudioObject = (p: p5, fileObject: p5.File) => {
     setState,
     keyPressed,
     getFileObject,
-    destroy
+    destroy,
+    mouseIsOverShape
   }
 }
 
