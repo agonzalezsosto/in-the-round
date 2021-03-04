@@ -112,7 +112,7 @@ const SubmissionSketch = (p: p5): void => {
     p.textSize(30)
     p.text('drop files', p.width / 2, p.height / 2)
     if (viewInstructions) {
-      p.textSize(12)
+      p.textSize(18)
       p.textAlign(p.LEFT)
       p.text(
         TEXT.DESCRIPTION_OBJECT +
@@ -126,7 +126,7 @@ const SubmissionSketch = (p: p5): void => {
           TEXT.DESCRIPTION_WANDER +
           TEXT.DESCRIPTION_HIDE,
         5,
-        15
+        25
       )
     }
 
@@ -189,7 +189,7 @@ const SubmissionSketch = (p: p5): void => {
 
   const handleDropFile = (file: p5.File) => {
     if (file.type === 'audio') {
-      if (file.size < 5000000) {
+      if (file.size < 10000000) {
         arrayObjects.push(AudioObject(p, file))
       } else {
         errorMessage = 'please insert a smaller file'

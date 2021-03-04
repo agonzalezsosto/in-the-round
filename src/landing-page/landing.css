@@ -28,26 +28,48 @@
   padding-top: 10pt;
 }
 
+.landing-disclaimer {
+  font-family: Lato;
+  font-weight: 400;
+  font-size: 10pt;
+  text-align: center;
+  padding-top: 15pt;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-style: italic;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 .landing-image {
-  width: 300px;
+  width: 250px;
   display: flex;
   align-self: center;
+  animation: rotation 12s infinite linear;
+  margin-top: 20pt;
 }
 
 .landing-button {
   background-color: white;
   font-weight: 600;
   font-size: 15pt;
-  margin-top: 30pt;
+  margin-top: 10pt;
   padding: 5pt;
   border: solid 2px;
   align-self: center;
-  margin-left: 20pt;
+  /* margin-left: 20pt; */
   user-select: none;
 }
 
 .submit-button {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.25);
   font-weight: 600;
   font-size: 15pt;
   margin-top: 30pt;
@@ -59,4 +81,9 @@
   position: absolute;
   right: 40px;
   top: 0px;
+}
+
+.landing-footer {
+  align-self: center;
+  margin-top: 35pt;
 }
