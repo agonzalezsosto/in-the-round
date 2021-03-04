@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import * as Image from '../images/logo.png'
 import * as Insta from '../images/insta.png'
 import * as Twitty from '../images/twitter.png'
@@ -9,6 +9,19 @@ import { useNavigate } from 'react-router'
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate()
+
+  const [width, setWidth] = useState<number>(window.innerWidth)
+
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange)
+    }
+  })
 
   const handleNavigate = () => {
     navigate('submission-page')
@@ -28,9 +41,16 @@ const LandingPage: React.FC = () => {
       <div className='landing-description' style={{ zIndex: 1 }}>
         {TEXT.LANDING_DESCRIPTION}
       </div>
-      <button className='landing-button' onClick={handleNavigate}>
-        {TEXT.ENTER_TEXT}
-      </button>
+      {width > 800 ? (
+        <button className='landing-button' onClick={handleNavigate}>
+          {TEXT.ENTER_TEXT}
+        </button>
+      ) : (
+        <div className='landing-disclaimer'>
+          Please visit this page from a computer to submit seeds
+        </div>
+      )}
+
       <div className='landing-disclaimer'>
         Please stick to one sound source per seed.
       </div>
