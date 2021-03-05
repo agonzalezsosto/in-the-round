@@ -17,6 +17,7 @@ type AudioObjectType = {
 
 let arrayObjects: Array<AudioObjectType> = []
 let isLoading = false
+let showThanks = false
 
 export const handleSubmitFiles = (): void => {
   isLoading = true
@@ -38,6 +39,10 @@ export const handleSubmitFiles = (): void => {
           isLoading = false
           arrayObjects = []
         }
+        showThanks = true
+        setTimeout(() => {
+          showThanks = false
+        }, 2000)
       }
 
       xhr.open('POST', 'https://content.dropboxapi.com/2/files/upload')
@@ -150,6 +155,16 @@ const SubmissionSketch = (p: p5): void => {
       p.textSize(30)
       p.textAlign('center')
       p.text(errorMessage, p.width / 2, p.height / 2)
+    }
+
+    if (showThanks) {
+      p.fill(20, 200)
+      p.rect(0, 0, p.width, p.height)
+      p.fill(255, 255)
+      p.stroke(255, 255)
+      p.textSize(30)
+      p.textAlign('center')
+      p.text('Thank you for your contribution!', p.width / 2, p.height / 2)
     }
   }
 

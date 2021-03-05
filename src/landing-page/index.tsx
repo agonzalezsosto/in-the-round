@@ -10,20 +10,20 @@ import { useNavigate } from 'react-router'
 const LandingPage: React.FC = () => {
   const navigate = useNavigate()
 
-  // const [width, setWidth] = useState<number>(window.innerWidth)
+  const [width, setWidth] = React.useState<number>(window.innerWidth)
 
-  // const handleWindowSizeChange = () => {
-  //   setWidth(window.innerWidth)
-  // }
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth)
+  }
 
-  // const isMobile = width < 800
+  const isMobile = width < 800
 
-  // useEffect(() => {
-  //   window.addEventListener('resize', handleWindowSizeChange)
-  //   return () => {
-  //     window.removeEventListener('resize', handleWindowSizeChange)
-  //   }
-  // })
+  React.useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange)
+    }
+  })
 
   const handleNavigate = () => {
     navigate('submission-page')
@@ -43,15 +43,15 @@ const LandingPage: React.FC = () => {
       <div className='landing-description' style={{ zIndex: 1 }}>
         {TEXT.LANDING_DESCRIPTION}
       </div>
-      {/* {isMobile ? (
+      {isMobile ? (
         <div className='landing-disclaimer'>
           Please visit this page from a computer to submit seeds
         </div>
-      ) : ( */}
-      <button className='landing-button' onClick={handleNavigate}>
-        {TEXT.ENTER_TEXT}
-      </button>
-      {/* )} */}
+      ) : (
+        <button className='landing-button' onClick={handleNavigate}>
+          {TEXT.ENTER_TEXT}
+        </button>
+      )}
 
       <div className='landing-disclaimer'>
         Please stick to one sound source per seed.
