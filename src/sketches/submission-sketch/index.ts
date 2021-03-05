@@ -81,9 +81,9 @@ const SubmissionSketch = (p: p5): void => {
     p.textFont('Lato')
     p.colorMode(p.HSB, 255)
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
       flowField[i] = []
-      for (let j = 0; j < 20; j++) {
+      for (let j = 0; j < 10; j++) {
         const noise = p.noise(i / 10, j / 10)
         flowField[i][j] = noise
       }
@@ -92,11 +92,11 @@ const SubmissionSketch = (p: p5): void => {
 
   p.draw = () => {
     p.background(255)
-    const xInt = p.width / 20
-    const yInt = p.height / 20
-    for (let i = 0; i < 20; i++) {
-      for (let j = 0; j < 20; j++) {
-        const noise = p.noise(i / 10, j / 10, p.frameCount / 100)
+    const xInt = p.width / 10
+    const yInt = p.height / 10
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        const noise = p.noise(i / 10, j / 10, p.frameCount / 500)
         flowField[i][j] = noise
         const col = flowField[i][j]
         const col2 = flowField[j][i]
