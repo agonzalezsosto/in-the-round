@@ -45,7 +45,7 @@ const LandingPage: React.FC = () => {
       </div>
       {isMobile ? (
         <div className='landing-disclaimer'>
-          Please visit this page from a computer to submit seeds
+          Please visit this page from a computer to submit seeds.
         </div>
       ) : (
         <button className='landing-button' onClick={handleNavigate}>
@@ -59,8 +59,11 @@ const LandingPage: React.FC = () => {
       <div className='landing-disclaimer'>
         By pressing enter, you agree that all sounds belong to you, and can be
         used in the release. If you would like to be credited, please include
-        your name in the file name. Info, such as key signature, BPM, or
-        additional suggestions, can also be included in the file name.
+        your name in the file name.
+      </div>
+      <div className='landing-disclaimer'>
+        Info, such as key signature, BPM, or additional suggestions, can also be
+        included in the file name.
       </div>
       <div className='landing-disclaimer'>{TEXT.DISCLAIMERB}</div>
       <div className='landing-footer'>
