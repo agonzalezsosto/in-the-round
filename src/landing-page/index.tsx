@@ -54,7 +54,7 @@ const LandingPage: React.FC = () => {
       )}
 
       <div className='landing-disclaimer'>
-        Please stick to one sound source per seed.
+        Please stick to one sound source per seed, each under 30 seconds.
       </div>
       <div className='landing-disclaimer'>
         By pressing enter, you agree that all sounds belong to you, and can be
@@ -64,6 +64,10 @@ const LandingPage: React.FC = () => {
       <div className='landing-disclaimer'>
         Info, such as key signature, BPM, or additional suggestions, can also be
         included in the file name.
+      </div>
+      <div className='landing-disclaimer'>
+        Submissions can also be sent to <b>intheround@nxrecords.co.uk</b>.
+        Submissions will be accepted until April 2, 2021.
       </div>
       <div className='landing-disclaimer'>{TEXT.DISCLAIMERB}</div>
       <div className='landing-footer'>

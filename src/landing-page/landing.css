@@ -87,3 +87,10 @@
   align-self: center;
   margin-top: 35pt;
 }
+
+.credit-text {
+  font-family: Lato;
+  text-align: center;
+  padding-top: 10pt;
+  font-size: 10pt;
+}
