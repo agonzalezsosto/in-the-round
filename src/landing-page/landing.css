@@ -83,6 +83,22 @@
   top: 0px;
 }
 
+.random-seed-button {
+  background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+  font-size: 15pt;
+  margin-top: 70pt;
+  padding: 5pt;
+  border: solid 2px;
+  align-self: center;
+  margin-left: 20pt;
+  user-select: none;
+  position: absolute;
+  right: 40px;
+  top: 0px;
+}
+
+
 .landing-footer {
   align-self: center;
   margin-top: 35pt;

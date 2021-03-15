@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import p5 from 'p5'
-import { SubmissionSketch, handleSubmitFiles } from '../sketches'
+import {
+  SubmissionSketch,
+  handleSubmitFiles,
+  getRandomFiles
+} from '../sketches'
 
 const SubmissionPage: React.FC = () => {
   useEffect(() => {
@@ -24,6 +28,13 @@ const SubmissionPage: React.FC = () => {
         onClick={handleSubmitFiles}
       >
         Submit Files
+      </button>
+      <button
+        id='a-button'
+        className='random-seed-button'
+        onClick={getRandomFiles}
+      >
+        Get Random Files
       </button>
     </div>
   )
