@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/in-the-round/static/css/main.4ba755c0.chunk.css",
+    "main.js": "/in-the-round/static/js/main.ed10e989.chunk.js",
+    "main.js.map": "/in-the-round/static/js/main.ed10e989.chunk.js.map",
+    "runtime-main.js": "/in-the-round/static/js/runtime-main.035b5ce5.js",
+    "runtime-main.js.map": "/in-the-round/static/js/runtime-main.035b5ce5.js.map",
+    "static/js/2.bcaa2295.chunk.js": "/in-the-round/static/js/2.bcaa2295.chunk.js",
+    "static/js/2.bcaa2295.chunk.js.map": "/in-the-round/static/js/2.bcaa2295.chunk.js.map",
+    "index.html": "/in-the-round/index.html",
+    "static/css/main.4ba755c0.chunk.css.map": "/in-the-round/static/css/main.4ba755c0.chunk.css.map",
+    "static/js/2.bcaa2295.chunk.js.LICENSE.txt": "/in-the-round/static/js/2.bcaa2295.chunk.js.LICENSE.txt",
+    "static/media/insta.f86cd1b7.png": "/in-the-round/static/media/insta.f86cd1b7.png",
+    "static/media/logo.62caf20e.png": "/in-the-round/static/media/logo.62caf20e.png",
+    "static/media/nx.7bc7601e.png": "/in-the-round/static/media/nx.7bc7601e.png",
+    "static/media/twitter.00f03278.png": "/in-the-round/static/media/twitter.00f03278.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.035b5ce5.js",
+    "static/js/2.bcaa2295.chunk.js",
+    "static/css/main.4ba755c0.chunk.css",
+    "static/js/main.ed10e989.chunk.js"
+  ]
+}
