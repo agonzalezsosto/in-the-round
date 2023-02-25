@@ -22,7 +22,7 @@ const SubmissionPage: React.FC = () => {
         height: '100%'
       }}
     >
-      <button
+      {/* <button
         id='create-button'
         className='submit-button'
         onClick={handleSubmitFiles}
@@ -35,7 +35,7 @@ const SubmissionPage: React.FC = () => {
         onClick={getRandomFiles}
       >
         Get Random Files
-      </button>
+      </button> */}
     </div>
   )
 }
