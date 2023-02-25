@@ -7,7 +7,7 @@ export enum TEXT {
   DESCRIPTION_DELAY = `Press 'd' to control delay \n`,
   DESCRIPTION_REVERB = `Press 'r' to control reverb\n`,
   DESCRIPTION_PLAYBACK = `Press 'a' to control playback speed\n`,
-  DESCRIPTION_LOOP = `Press 'l' to loop\n`,
+  DESCRIPTION_LOOP = `Press 'l' to loop and start playback\n`,
   DESCRIPTION_DELETE = `Press 'x' to delete an object\n`,
   DESCRIPTION_RESET = `Press 'o' to return to defaults\n\n\n`,
   DESCRIPTION_GENERAL = `When hovering anywhere over the browser: \n`,
